@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577030074034.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D591668",
+    "lastKnownWriteTime" : 1577030099,
+    "last_content_update" : 1577030099898,
+    "path" : "D:/課程/北大課程/高維度資料分析/HDDA_FinalReport/DataPreprocess.R",
+    "project_path" : "DataPreprocess.R",
+    "properties" : {
+        "cursorPosition" : "3,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

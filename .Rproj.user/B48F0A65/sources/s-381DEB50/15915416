@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577029996597.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "15915416",
+    "lastKnownWriteTime" : 1577031476,
+    "last_content_update" : 1577031476536,
+    "path" : "D:/課程/北大課程/高維度資料分析/HDDA_FinalReport/ImputeData.R",
+    "project_path" : "ImputeData.R",
+    "properties" : {
+        "cursorPosition" : "34,0",
+        "scrollLine" : "13"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
