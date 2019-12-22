@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "15915416",
-    "lastKnownWriteTime" : 1577031476,
-    "last_content_update" : 1577031476536,
+    "lastKnownWriteTime" : 1577033653,
+    "last_content_update" : 1577033653656,
     "path" : "D:/課程/北大課程/高維度資料分析/HDDA_FinalReport/ImputeData.R",
     "project_path" : "ImputeData.R",
     "properties" : {
-        "cursorPosition" : "34,0",
-        "scrollLine" : "13"
+        "cursorPosition" : "61,1",
+        "scrollLine" : "42"
     },
     "read_only" : false,
     "read_only_alternatives" : [
