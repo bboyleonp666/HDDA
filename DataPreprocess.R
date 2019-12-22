@@ -4,8 +4,7 @@ library(dplyr)
 library(mice)
 library(missForest)
 
-### data pre-processing
-# -----------------------
+### ------------ Delete columns of categorical ------------ ###
 DataDir = list.files()[file.info(list.files())$isdir]
 # HousePriceTest = read.csv(list.files(DataDir, pattern = "test", full.names = TRUE))
 HousePriceTrain = read.csv(list.files(DataDir, pattern = "train", full.names = TRUE))
@@ -50,32 +49,47 @@ str(HousePrice_NAreduce)
 ColumnRM_factor = sapply(HousePrice_NAreduce, class)
 HousePrice_FACTORreduce = HousePrice_NAreduce[, ColumnRM_factor != "factor"]
 str(HousePrice_FACTORreduce)
+dim(HousePrice_FACTORreduce)
 
-      
-### transfer dummy variables into dummy
-## find the freqence of each column not greater then 10 while it's not a factor
-TabLen = apply(HousePrice, 2, function(x) length(table(x)))
-names(TabLen[TabLen <= 10])
 
-HousePrice[, which(TabLen <= 10)] %>%
-  apply(2, FUN = table, useNA = "ifany")
+### ------------ Combine data with similar info ------------ ###
+## Combine male and female data as sex ratio
+cnames = colnames(HousePrice_FACTORreduce) # get the columns of data after deleting variables
+start = which(grepl("full_all", cnames)) # find variable "full_all"
+end = which(grepl("X0_13_female", cnames)) # find variable "X0_13_female"
 
-ncol(HousePrice) - sum(TabLen <= 10) # Number of the columns left without freqence length not greater than 10
+## seperate data into two parts
+data_part1 = HousePrice_FACTORreduce[, -(start:end)] # other data
+data_part2 = HousePrice_FACTORreduce[, start:end] # population data
 
-### Decision: remove all the columns which are factor(dummy) or freqence length not greater than 10
-## find the index of factor and TabLen <= 10
-idx = unique(c(which(sapply(HousePrice, is.factor)), which(TabLen <= 10)))
-HousePriceConti = HousePrice[, -idx]
-dim(HousePriceConti)
-head(HousePriceConti)
+# head(data_part2)
+# population data to sex ratio data
+ratio = NULL
+for(i in 1:ncol(data_part2)){
+  if(i %% 3 == 1){
+    ratio = cbind(ratio, data_part2[, i])
+  }else if(i %% 3 == 2){
+    ratio = cbind(ratio, (data_part2[, i]/data_part2[, i+1]))
+  }
+}
+varnames = gsub("_male", "_ratio", colnames(data_part2))
+varnames = varnames[!grepl("female", varnames)]
+varnames = gsub("ekder", "elder", varnames)
+varnames = gsub("male_f", "full_ratio", varnames)
+colnames(ratio) = varnames
 
-## check the complete case left
-sum(!complete.cases(HousePriceConti)) / nrow(HousePriceConti)
-# more than 37% rows contain missing values
+columns_to_rm = grepl("X0_1", varnames)
+sexRatio = data.frame(ratio[, !columns_to_rm])
 
-## write continuous data into HousePrice_ContiVar.csv
-# write.csv(data = HousePriceConti, "HousePrice_ContiVar.csv", row.names = FALSE)
+## Combine sex ratio and data_part1 and name it as HousePrice
+HousePrice = cbind(data_part1, sexRatio)
+str(HousePrice)
+dim(HousePrice)
+write.csv(HousePrice, "HousePrice.csv", row.names = FALSE)
 
+## missing ratio
+cat("Missing ratio:", mean(is.na(HousePrice)), "\n")
+colMeans(is.na(HousePrice))
 
 ### ------------ Imputation Start From Here ------------ ###
 ## try n error: imputation
