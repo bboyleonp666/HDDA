@@ -5,30 +5,55 @@ library(mice)
 library(missForest)
 
 ### data pre-processing
+# -----------------------
 DataDir = list.files()[file.info(list.files())$isdir]
 # HousePriceTest = read.csv(list.files(DataDir, pattern = "test", full.names = TRUE))
 HousePriceTrain = read.csv(list.files(DataDir, pattern = "train", full.names = TRUE))
 head(HousePriceTrain)
 dim(HousePriceTrain)
-colnames(HousePriceTrain)
 
+## pick some special variable which we want to keep
+id = HousePriceTrain$id
+time_trade = as.Date(HousePriceTrain$timestamp)
+sub_area = HousePriceTrain$sub_area
 
-## check NA proportion in variables
-# default setting
-AbandonRatio = .25
+## create column names vector
+cnames = colnames(HousePriceTrain)
 
-# get columns with NAs
-NAinVar = apply(HousePriceTrain, 2, function(x) sum(is.na(x)))
+### remove columns with ("count" or "ID" or "top") in column names
+Columns_Count_Top_ID = (grepl("count", cnames) | grepl("ID", cnames) | grepl("top", cnames))
+HousePrice_NO_Count_Top_ID = HousePriceTrain[, !Columns_Count_Top_ID]
+head(HousePrice_NO_Count_Top_ID)
+tables = apply(HousePrice_NO_Count_Top_ID, 2, table)
+str(HousePrice_NO_Count_Top_ID)
+
+### check NA proportion in variables
+## default setting
+AbandonRatio = .2
+
+## get columns with NAs
+NAinVar = colSums(is.na(HousePrice_NO_Count_Top_ID))
 NAinVar[NAinVar > 0]
 
-## remove columns with too many NAs
-ColumnRM = which(NAinVar >= nrow(HousePriceTrain)*AbandonRatio)
-HousePrice = HousePriceTrain[, -ColumnRM]
-head(HousePrice)
-dim(HousePrice)
+## get columns with NAs
+# NAratio = apply(HousePriceTrain, 2, function(x) mean(is.na(x)))
+# round(NAratio[NAratio > 0], 2)
 
-## transfer dummy variables into dummy
-# find the freqence of each column not greater then 10 while it's not a factor
+## remove columns with too many NAs
+ColumnRM_NA = which(NAinVar >= nrow(HousePrice_NO_Count_Top_ID)*AbandonRatio)
+HousePrice_NAreduce = HousePrice_NO_Count_Top_ID[, -ColumnRM_NA]
+head(HousePrice_NAreduce)
+dim(HousePrice_NAreduce)
+str(HousePrice_NAreduce)
+
+## remove data which datatype is "factor"
+ColumnRM_factor = sapply(HousePrice_NAreduce, class)
+HousePrice_FACTORreduce = HousePrice_NAreduce[, ColumnRM_factor != "factor"]
+str(HousePrice_FACTORreduce)
+
+      
+### transfer dummy variables into dummy
+## find the freqence of each column not greater then 10 while it's not a factor
 TabLen = apply(HousePrice, 2, function(x) length(table(x)))
 names(TabLen[TabLen <= 10])
 
@@ -37,8 +62,8 @@ HousePrice[, which(TabLen <= 10)] %>%
 
 ncol(HousePrice) - sum(TabLen <= 10) # Number of the columns left without freqence length not greater than 10
 
-## Decision: remove all the columns which are factor(dummy) or freqence length not greater than 10
-# find the index of factor and TabLen <= 10
+### Decision: remove all the columns which are factor(dummy) or freqence length not greater than 10
+## find the index of factor and TabLen <= 10
 idx = unique(c(which(sapply(HousePrice, is.factor)), which(TabLen <= 10)))
 HousePriceConti = HousePrice[, -idx]
 dim(HousePriceConti)
