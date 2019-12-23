@@ -1,6 +1,8 @@
 ### packages
 library(magrittr)
 library(dplyr)
+library(mice)
+library(missForest)
 
 ### ------------ Delete columns of categorical ------------ ###
 DataDir = list.files()[file.info(list.files())$isdir]

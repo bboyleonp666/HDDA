@@ -8,7 +8,7 @@ HousePriceTrain = read.csv(list.files(DataDir, pattern = "train", full.names = T
 
 
 NA_volumn = colSums(is.na(HousePriceTrain))
-NAdata = data.frame(variable = row.names(NAdata), 
+NAdata = data.frame(variable = row.names(HousePriceTrain), 
                     notNA_volumn = nrow(HousePriceTrain) - NA_volumn,
                     NA_volumn, 
                     row.names = NULL)
