@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577335893296.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3136509842",
+    "id" : "221FADDF",
+    "lastKnownWriteTime" : 1577101511,
+    "last_content_update" : 1577101511,
+    "path" : "D:/HDDA/HDDA_FinalReport/DataImputedProcess.R",
+    "project_path" : "DataImputedProcess.R",
+    "properties" : {
+        "cursorPosition" : "13,44",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
