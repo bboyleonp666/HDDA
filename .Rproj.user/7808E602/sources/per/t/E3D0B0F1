@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577805807101.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2025146675",
+    "id" : "E3D0B0F1",
+    "lastKnownWriteTime" : 1577094366,
+    "last_content_update" : 1577094366,
+    "path" : "D:/HDDA/HDDA_FinalReport/Final02_ImputeData.R",
+    "project_path" : "Final02_ImputeData.R",
+    "properties" : {
+        "cursorPosition" : "62,0",
+        "scrollLine" : "41"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

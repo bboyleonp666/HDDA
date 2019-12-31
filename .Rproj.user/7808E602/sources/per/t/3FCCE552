@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577805553862.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2981052082",
+    "id" : "3FCCE552",
+    "lastKnownWriteTime" : 1577805786,
+    "last_content_update" : 1577805786040,
+    "path" : "D:/HDDA/HDDA_FinalReport/Final01_DataPreprocess.R",
+    "project_path" : "Final01_DataPreprocess.R",
+    "properties" : {
+        "cursorPosition" : "93,0",
+        "scrollLine" : "71"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

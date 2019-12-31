@@ -1,15 +1,12 @@
-train <- read.csv("train.csv", header= T)
+train <- read.csv("Russian House Price/train.csv", header= T)
 
 #missing pattern
 library(mice)
 md.pattern(train)
 
 library(VIM)
-windows()
-aggr(train,prop=FALSE,numbers=TRUE) 
 
 #類別的行數
-ncate <- sort(c(a, ))
 a <- c(2, 7, 8, 11, 12, 153, 119, 115, 107, 41, 40, 39, 38, 37, 36, 35, 34, 
        30, 13, 85, 100, 103, 114, 117, 121, 123, 187, 156, 158, 160, 179, 181, 
        202, 204, 206, 225, 227, 229, 248, 250, 252, 271, 273, 275)
@@ -39,17 +36,17 @@ aggr(cont, prop=TRUE, numbers=TRUE)
 colnames(cont)
 
 
-
 #distribution of price
 qqnorm(train$price_doc)
 qqline(train$price_doc)
 
 #以area為分類,對log(price)作圖
+library(ggplot2)
 ggplot(train)+   
   geom_boxplot(aes(x= sub_area, y=log(price_doc))) +
   theme(axis.text.x = element_text(face = "bold", color = "black", size = 5, angle = 90)) +
   labs(title = "不同地區log(價格)", x = "log(價格)", y = "地區") 
-boxplot(log(train$price_doc))
+boxplot(log(train$price_doc), main = "對數(價格)")
 
 
 #年月成交量
@@ -83,7 +80,6 @@ cowplot::plot_grid(dis1, dis2, labels = "AUTO", ncol=1)
 #時間與用途 
 ##timestamp/ product_type
 library(scales)
-library(ggplot2)
 dateway <- train[, c(2, 12)] %>%  table %>% as.data.frame 
 dateway$timestamp  <- as.Date(dateway$timestamp)
 datebreaks <- seq(as.Date("2011-08-01"), as.Date("2015-06-01"), by="month")
@@ -116,6 +112,7 @@ library(patchwork)
 p1 + p2
 
 #平均價格前20地區
+library(dplyr)
 train %>% select(sub_area,price_doc)%>% group_by(sub_area)%>% 
   summarize(count=n(),price=mean(price_doc))%>%
   arrange(desc(price))%>%head(n=20)%>% 
@@ -144,7 +141,6 @@ school_chars <- c('children_preschool', 'preschool_quota', 'preschool_education_
                   'price_doc')
 
 corrplot(cor(train[, school_chars], use='complete.obs'), col = col1(20))
-
 
 #附近設施距離+價格之corrplot
 distance_chars <- c('metro_km_avto', 'metro_km_walk', 'kindergarten_km',
