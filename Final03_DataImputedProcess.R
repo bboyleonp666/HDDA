@@ -52,6 +52,6 @@ HousePriceList = list(id = id,
                       continuous = data, 
                       categorical = categorical)
 
-## save data in "HousePriceList.rds"
+### save data in .rds files
+## save whole list in "HousePriceList.rds"
 saveRDS(HousePriceList, "HousePriceList.rds")
-

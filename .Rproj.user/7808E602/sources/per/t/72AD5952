@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577862699354.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3022494883",
+    "id" : "72AD5952",
+    "lastKnownWriteTime" : 1577863443,
+    "last_content_update" : 1577863443964,
+    "path" : "D:/HDDA/HDDA_FinalReport/Final04_SplitData.R",
+    "project_path" : "Final04_SplitData.R",
+    "properties" : {
+        "cursorPosition" : "21,19",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
