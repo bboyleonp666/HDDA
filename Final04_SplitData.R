@@ -20,4 +20,4 @@ DifferentDimensionHousrPriceList = list(
 )
 
 ## save as rds file
-saveRDS(DifferentDimensionHousrPriceList, "DifferentDimensionHousrPriceList.rds")
+saveRDS(DifferentDimensionHousrPriceList, "DimReduction/DifferentDimensionHousrPriceList.rds")
